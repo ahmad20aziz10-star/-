@@ -1,10 +1,5 @@
-/* ============================================================
-   سهرة — عامل الخدمة (Service Worker)
-   الهدف: بعد أول زيارة تعمل اللعبة بلا إنترنت إطلاقاً.
-   الاستراتيجية: الشبكة أولاً للصفحة (ليصل التحديث فوراً)،
-   ومع فشلها نرجع للنسخة المحفوظة. والأيقونات من المخزن مباشرة.
-   ============================================================ */
-const V = 'sahra-v1';
+const V = 'sahra-v4';
+const PAGE = './index.html';
 const SHELL = [
   './',
   './index.html',
@@ -18,7 +13,7 @@ const SHELL = [
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(V)
-      .then(c => c.addAll(SHELL))
+      .then(c => Promise.all(SHELL.map(u => c.add(u).catch(() => {}))))
       .then(() => self.skipWaiting())
       .catch(() => self.skipWaiting())
   );
@@ -32,39 +27,45 @@ self.addEventListener('activate', e => {
   );
 });
 
+function refresh(req, key) {
+  return fetch(req).then(res => {
+    if (res && (res.ok || res.type === 'opaqueredirect')) {
+      const copy = res.clone();
+      caches.open(V).then(c => c.put(key || req, copy)).catch(() => {});
+    }
+    return res;
+  });
+}
+
 self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET') return;
 
   const url = new URL(req.url);
-  /* لا نلمس وسطاء MQTT ولا أي طلب خارج نطاق الموقع */
   if (url.origin !== self.location.origin) return;
 
   const isPage = req.mode === 'navigate' ||
     (req.headers.get('accept') || '').includes('text/html');
 
   if (isPage) {
-    /* الشبكة أولاً: التحديث يصل فوراً، وبلا إنترنت نرجع للمحفوظ */
     e.respondWith(
-      fetch(req)
-        .then(res => {
-          const copy = res.clone();
-          caches.open(V).then(c => c.put('./index.html', copy)).catch(() => {});
-          return res;
-        })
-        .catch(() => caches.match('./index.html').then(r => r || caches.match('./')))
+      caches.match(PAGE).then(hit => {
+        const net = refresh(req, PAGE).catch(() => null);
+        if (hit) { e.waitUntil(net); return hit; }
+        return net.then(res => res || caches.match('./'));
+      })
     );
     return;
   }
 
-  /* الأصول الثابتة: المخزن أولاً */
   e.respondWith(
-    caches.match(req).then(hit => hit || fetch(req).then(res => {
-      if (res && res.ok) {
-        const copy = res.clone();
-        caches.open(V).then(c => c.put(req, copy)).catch(() => {});
-      }
-      return res;
-    }).catch(() => hit))
+    caches.match(req).then(hit => {
+      if (hit) return hit;
+      return refresh(req).catch(() => caches.match(PAGE));
+    })
   );
+});
+
+self.addEventListener('message', e => {
+  if (e.data === 'skip-waiting') self.skipWaiting();
 });

@@ -8,7 +8,9 @@
 <title>سهرة تريفيا</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&family=Almarai:wght@300;400;700;800&family=Amiri:wght@400;700&display=swap">
+<!-- الخطوط لا تحجب ظهور الصفحة: تُحمَّل بالتوازي ثم تُطبَّق فور وصولها -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&family=Almarai:wght@300;400;700;800&family=Amiri:wght@400;700&display=swap" media="print" onload="this.media='all';this.onload=null">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&family=Almarai:wght@300;400;700;800&family=Amiri:wght@400;700&display=swap"></noscript>
 <style>
 /* ============================================================
    سهرة — هوية «مجلس العيلة»
@@ -166,6 +168,16 @@ button{cursor:pointer;border:none;background:none}
 @media (max-width:400px){
   #modeChip{display:none!important}
   .brand{font-size:17px}
+}
+/* الشاشات الضيّقة جداً: نتخلّى عمّا هو إخباري بحت قبل أن نضحّي بالتمرير */
+@media (max-width:400px){
+  /* شريط الوسائل على شاشة «الشيفرة» الكبيرة إخباري فقط —
+     الأزرار الحقيقية صارت على جوالات اللاعبين. */
+  #screen-cn .wilds{display:none}
+  .vw-card{padding:12px 11px}
+  .vw-teams{margin-bottom:7px}
+  .vwr{padding:7px 10px;font-size:13px}
+  .vwo{padding:9px 11px;font-size:13.5px}
 }
 
 /* ---------- الأزرار ---------- */
@@ -783,6 +795,79 @@ textarea.input{min-height:120px;resize:vertical;line-height:1.7;font-size:15.5px
   .mode-card p{font-size:13px}
 }
 
+/* ---------- الجوال: نضغط كل شيء قليلاً حتى تتّسع اللعبة بلا تمرير ----------
+   التصغير الآلي (Fit) هو خطّ الدفاع الأخير؛ الأفضل ألّا يحتاجه أصلاً.
+   فنقلّل هنا الحشو والفجوات وأحجام الخطوط على عرض الجوال. */
+@media (max-width:560px){
+  :root{--sp:clamp(8px,2vw,13px)}
+  .stage{gap:var(--sp);padding-block:10px}
+  .panel{padding:13px}
+  .btn{padding:11px 16px;font-size:15px}
+  .btn-lg{padding:13px 20px;font-size:16px}
+  .chip{padding:6px 10px;font-size:12px}
+  .qhead{gap:7px}
+  .timer,.timer svg{width:54px;height:54px}
+  .timer .val{font-size:19px}
+  .eyebrow{font-size:10.5px}
+
+  /* السؤال والخيارات */
+  .qtext{padding:12px 13px;font-size:clamp(17px,4.4vw,23px)}
+  .opts{gap:7px}
+  .opt{min-height:52px;padding:10px 12px;gap:10px;font-size:15px}
+  .opt .sh{width:28px;height:28px;font-size:14px}
+
+  /* لوحة النقاط */
+  .sj-teams{gap:7px}
+  .sj-team{padding:9px 11px}
+  .sj-team .st-score{font-size:23px}
+  .sj-team .wilds{display:none}       /* الوسائل تظهر في شاشة السؤال */
+  .sj-board{gap:5px}
+  .sj-tile{padding:9px 4px;font-size:16px}
+  .sj-cat{padding:7px 4px}
+  .sj-cat .sc-ic{font-size:15px}
+  .sj-cat .sc-n{font-size:10.5px}
+  .sj-panel{padding:12px}
+
+  /* سألنا الناس */
+  .feud-q{padding:11px 13px}
+  .feud-q .fq-t{font-size:clamp(16px,4.2vw,22px)}
+  .feud-board{gap:5px}
+  .slot{height:48px;padding:0 11px;font-size:14px}
+  .host-tools{gap:8px}
+  .guess-row{gap:6px}
+  .privacy{padding:9px 11px}
+  .privacy .pv-row span{font-size:11.5px;line-height:1.5}
+  /* زرّا اللابتوب: نافذة العرض الثانية ولوحة المضيف — لا معنى لهما على الجوال،
+     ومكانهما صار «📺 المشاهدة» الذي يفتح اللعبة على جوالات الحاضرين. */
+  #btnFdScreen,#btnFdPad{display:none}
+
+  /* الخزنة */
+  .v-teams{gap:7px}
+  .v-pot{padding:12px}
+  .vp-n{font-size:clamp(30px,9vw,44px)}
+  .v-ladder{gap:3px}
+  .v-ladder i{font-size:10.5px;padding:3px 6px}
+  #screen-vault .opt{min-height:54px}
+
+  /* الشيفرة ومثّلها */
+  .cn-turn{padding:8px 11px;gap:9px}
+  .cn-turn .ct-em{width:38px;height:38px;font-size:20px;border-radius:12px}
+  .cn-turn h2{font-size:17px}
+  .ct-key{padding:5px 10px}
+  .ct-kn{font-size:15px}
+  .ct-s{padding:6px 11px;font-size:13px}
+  .ct-s .num{font-size:17px}
+  .cn-clue{padding:8px 10px}
+  .cn-board{gap:4px}
+  .cn-card{min-height:38px;padding:4px 3px;border-radius:10px}
+  .at-card{padding:14px 12px}
+  .at-word{font-size:clamp(26px,8vw,40px)}
+  .at-ready{padding:16px 12px}
+  .at-ready .at-ic{font-size:36px}
+  .wilds{gap:5px}
+  .wild{padding:5px 9px;font-size:11.5px}
+}
+
 /* ============================================================
    الشيفرة
    ============================================================ */
@@ -798,6 +883,7 @@ textarea.input{min-height:120px;resize:vertical;line-height:1.7;font-size:15.5px
 .ct-kn.roll{animation:rollName .06s steps(1) infinite}
 @keyframes rollName{0%{opacity:.35}50%{opacity:1}}
 .ct-scores{display:flex;gap:8px;flex:none}
+.ct-s small{display:block;font-size:10.5px;font-weight:700;opacity:.62;margin-top:-2px}
 .ct-s{display:inline-flex;align-items:center;gap:7px;padding:9px 15px;border-radius:99px;font-weight:800;
   font-size:15px;background:var(--card2);border:2px solid var(--line)}
 .ct-s .num{font-family:var(--f-num);font-size:20px}
@@ -827,6 +913,12 @@ textarea.input{min-height:120px;resize:vertical;line-height:1.7;font-size:15.5px
   box-shadow:0 0 0 3px var(--bad),0 14px 30px -14px #000}
 .cn-card .cn-w{padding:2px 3px;overflow-wrap:anywhere}
 .cn-card .cn-tag{position:absolute;top:4px;inset-inline-start:6px;font-size:11.5px;font-weight:800;opacity:.85}
+/* الشاشة الكبيرة عرضٌ فقط — لا لمس ولا تأثير تحويم */
+.cn-card.show{cursor:default;box-shadow:none}
+.cn-card.show:hover{transform:none;border-color:var(--line)}
+.cn-card.show.open:hover{border-color:transparent}
+.wild.show{cursor:default;pointer-events:none}
+.wild.show.spent{opacity:.34;text-decoration:line-through}
 /* وضع «المفتاح على الشاشة» — مموّه حتى يقرأه صاحبه */
 .cn-board.peekmode .cn-card:not(.open)::after{content:'';position:absolute;inset:0;opacity:.9}
 .cn-board.peekmode .cn-card.k0:not(.open)::after{background:#FF7E72}
@@ -1051,6 +1143,87 @@ textarea.input{min-height:120px;resize:vertical;line-height:1.7;font-size:15.5px
 .cs .cm .cm-sw:hover{border-color:var(--tc);color:var(--ink)}
 .cs .cs-empty{padding:14px;text-align:center;color:var(--ink3);font-size:13.5px;
   border:2px dashed var(--line2);border-radius:12px}
+/* ---------- زرّ رمز المشاهدة ولوحته ---------- */
+/* بحجم الشارات المجاورة له في رأس اللعبة، فلا يُطيل الشاشة */
+.watch-btn{padding:7px 12px;font-size:13.5px;gap:6px;border-radius:99px;
+  border-color:var(--sky);color:var(--sky);font-weight:800;letter-spacing:.02em}
+.watch-btn:hover{background:color-mix(in srgb,var(--sky) 14%,var(--card));border-color:var(--sky)}
+.watch-btn.on{background:var(--sky);color:#fff;border-color:var(--sky)}
+/* ثابتة فوق اللعبة: تُظهر الرمز بلا أن تُزحزح شيئاً أو تُعيد التمرير */
+.watch-pop{position:fixed;z-index:40;top:auto;inset-inline-end:max(14px,env(safe-area-inset-right));
+  bottom:max(14px,env(safe-area-inset-bottom));width:min(320px,calc(100vw - 28px));
+  padding:16px;border-radius:var(--r-l);background:var(--card);border:2px solid var(--sky);
+  box-shadow:0 24px 60px -18px rgba(0,0,0,.6),var(--sh);
+  animation:wpIn .24s cubic-bezier(.2,1.1,.4,1)}
+@keyframes wpIn{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}
+.watch-pop .wp-head{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px}
+.watch-pop .wp-head>div{flex:1;min-width:0}
+.watch-pop .wp-head h3{font-size:17px;margin-top:4px}
+.watch-pop .wp-pin{font-family:var(--f-num);font-size:38px;font-weight:800;text-align:center;
+  letter-spacing:.14em;color:var(--sky);line-height:1.1;margin-bottom:10px}
+.watch-pop .qr-wrap{margin:0 auto 10px;width:max-content}
+.watch-pop .qr-wrap canvas{display:block;border-radius:10px}
+.watch-pop .join-url{font-size:11px;word-break:break-all;text-align:center;color:var(--ink3)}
+.watch-pop .wp-foot{margin-top:12px;padding-top:10px;border-top:1.5px dashed var(--line2)}
+@media (max-width:560px){
+  .watch-btn{padding:6px 10px;font-size:12.5px}
+  .watch-pop{inset-inline:12px;width:auto;padding:13px}
+  .watch-pop .wp-pin{font-size:32px}
+}
+@media (prefers-reduced-motion:reduce){.watch-pop{animation:none}}
+
+/* ---------- شاشة المشاهد ----------
+   شاشة مرآة، غايتها أن تُرى كاملة بلا تمرير — فحشوها أضيق من غيرها. */
+#screen-view .phone{gap:9px}
+#screen-view .p-status{padding:8px 11px}
+#screen-view #vw-live{gap:0}
+#screen-view .row{margin-top:auto}
+.vw-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:8px}
+.vw-chips .chip{font-size:11.5px;padding:5px 10px}
+.vw-teams{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+.vwt{display:flex;align-items:center;gap:7px;padding:7px 13px;border-radius:99px;
+  background:var(--card2);border:1.5px solid var(--line);font-weight:800;font-size:13.5px}
+.vwt.on{border-color:var(--tc);background:color-mix(in srgb,var(--tc) 15%,var(--card2));
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--tc) 28%,transparent)}
+.vwt .vwt-em{font-size:16px}
+.vwt .vwt-n{max-width:9ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vwt .vwt-s{font-family:var(--f-num);font-size:18px;color:var(--tc)}
+.vw-card{padding:16px 15px;border-radius:var(--r-l);background:var(--card);
+  border:2px solid var(--line);box-shadow:var(--sh-s);text-align:center;margin-bottom:10px}
+.vw-card .vw-eyebrow{display:block;font-size:11.5px;font-weight:800;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink3);margin-bottom:7px}
+.vw-card .vw-title{font-family:var(--f-disp);font-weight:800;font-size:clamp(17px,4.6vw,24px);line-height:1.35;overflow-wrap:anywhere}
+.vw-opts{display:grid;gap:7px;margin-bottom:8px}
+.vwo{display:flex;align-items:center;gap:10px;padding:11px 13px;border-radius:var(--r-m);
+  background:var(--c);color:#fff;font-weight:700;font-size:14.5px;border:2px solid transparent}
+.vwo .sh{width:26px;height:26px;border-radius:9px;background:rgba(255,255,255,.4);
+  display:grid;place-items:center;font-size:13px;flex:none}
+.vwo .lbl{flex:1;min-width:0;overflow-wrap:anywhere}
+.vwo.dim{opacity:.34;filter:saturate(.35)}
+.vwo.ok{border-color:#fff;box-shadow:0 0 0 3px var(--ok)}
+.vwo.bad{border-color:#fff;box-shadow:0 0 0 3px var(--bad)}
+.vw-rows{display:grid;gap:5px;margin-bottom:8px}
+.vwr{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:var(--r-m);
+  background:var(--card2);border:1.5px solid var(--line);font-weight:700;font-size:14px}
+.vwr.open{background:var(--card);border-color:var(--sky)}
+.vwr .vwr-n{width:20px;height:20px;border-radius:7px;background:var(--line2);color:var(--ink2);
+  display:grid;place-items:center;font-size:11px;font-weight:800;flex:none}
+.vwr.open .vwr-n{background:var(--sky);color:#fff}
+.vwr .vwr-l{flex:1;min-width:0;overflow-wrap:anywhere}
+.vwr .vwr-r{font-family:var(--f-num);font-size:16px;color:var(--ink2);flex:none}
+.vwr.open .vwr-r{color:var(--sky)}
+
+/* نقاط الفريقين على جوال اللاعب */
+.cnp-scores{display:flex;gap:7px;justify-content:center;margin:2px 0 6px}
+.cps{display:flex;align-items:center;gap:6px;padding:5px 12px;border-radius:99px;
+  background:var(--card2);border:1.5px solid var(--line);font-weight:800;font-size:13px}
+.cps.on{border-color:var(--tc);background:color-mix(in srgb,var(--tc) 14%,var(--card2))}
+.cps .cps-em{font-size:15px}
+.cps .cps-n{font-family:var(--f-num);font-size:17px;color:var(--tc)}
+.cps small{font-size:10px;font-weight:700;color:var(--ink3)}
+.cnp-wilds{justify-content:center;gap:5px;margin-bottom:4px}
+.cnp-wilds .wild{font-size:11.5px;padding:5px 9px}
+
 /* لوحة اللاعب على الجوال */
 .cnp-board{grid-template-columns:repeat(5,1fr);gap:4px}
 .cnp-board .cn-card{min-height:38px;font-size:clamp(9px,2.7vw,13px);border-width:1.5px;border-radius:9px;padding:5px 3px}
@@ -1528,7 +1701,7 @@ if ('serviceWorker' in navigator &&
       </div>
       <div class="panel" style="display:flex;gap:14px;align-items:flex-start">
         <span style="font-size:26px">💡</span>
-        <p class="muted" style="font-size:14.5px"><b>ما عندك رابط ولا إنترنت؟</b> اختر «لوحة النقاط» أو «سألنا الناس» أو «الخزنة» أو «مثّلها» — تكفيها شاشة واحدة أمام الجميع، ولا يحتاج أحد أن يفتح شيئاً على جواله. أما <b>«مسابقة السهرة»</b> فيحتاج كل لاعب جواله، و<b>«الشيفرة»</b> تحتاج أربعة أجهزة على الأقل. و<b>«سألنا الناس»</b> يستضيفها لابتوب أو كمبيوتر لأن المضيف يكتب إجابات الفريق بلوحة المفاتيح.</p>
+        <p class="muted" style="font-size:14.5px"><b>ما عندك رابط ولا إنترنت؟</b> اختر «لوحة النقاط» أو «سألنا الناس» أو «الخزنة» أو «مثّلها» — تكفيها شاشة واحدة أمام الجميع، ولا يحتاج أحد أن يفتح شيئاً على جواله. <b>وإن كان معك إنترنت</b> فسيظهر في أعلى هذه الألعاب رمز <b>📺 المشاهدة</b>: من كان بعيداً عن الشاشة يمسحه بجواله فيتابع اللعبة لحظة بلحظة. أما <b>«مسابقة السهرة»</b> فيحتاج كل لاعب جواله، و<b>«الشيفرة»</b> تحتاج أربعة أجهزة على الأقل. و<b>«سألنا الناس»</b> يستضيفها لابتوب أو كمبيوتر لأن المضيف يكتب إجابات الفريق بلوحة المفاتيح.</p>
       </div>
     </div>
   </section>
@@ -1666,6 +1839,7 @@ if ('serviceWorker' in navigator &&
         <span class="chip" id="vRound">—</span>
         <span class="chip" id="vCat" hidden>—</span>
         <span class="chip" id="vDiff" hidden>—</span>
+        <button class="btn btn-ghost watch-btn" data-watch hidden aria-pressed="false">📺 المشاهدة</button>
         <div class="spacer"></div>
         <button class="btn btn-ghost" data-wild="vault">🃏 الوسائل</button>
         <button class="btn btn-ghost" id="btnVEnd">أنهِ اللعبة</button>
@@ -1781,10 +1955,10 @@ if ('serviceWorker' in navigator &&
             </div>
           </div>
           <div class="cn-split" id="cnSplit"></div>
-          <div class="privacy" id="cnHostKey" hidden style="margin-top:4px">
-            <div class="pv-row"><span class="pv-ic">🔑</span><div class="grow">
-              <b>سحبتك القرعة صاحب مفتاح</b>
-              <span>أنت داخل القرعة مثل الجميع. لتحفظ السرّ، افتح اللعبة على <b>جوالك</b> وانضم بالرمز نفسه — أو استخدم كشف المفتاح المموّه أدناه بعد أن يشيح الجميع بأنظارهم.</span>
+          <div class="privacy" id="cnHostKey" style="margin-top:4px">
+            <div class="pv-row"><span class="pv-ic">📱</span><div class="grow">
+              <b>هذه الشاشة للعرض فقط</b>
+              <span>من أراد اللعب — وأنت منهم — يفتح اللعبة على <b>جواله</b> وينضم بالرمز نفسه. الجميع سواء في القرعة، ولا أحد يرى المفتاح على الشاشة الكبيرة.</span>
             </div></div>
           </div>
           <p class="tiny muted" id="cnLobbyNote">التوزيع عشوائي: يقسم اللاعبين فريقين ويسحب <b>صاحب مفتاح</b> لكل فريق. اضغط «أعد التوزيع» لقرعة جديدة.</p>
@@ -1831,12 +2005,7 @@ if ('serviceWorker' in navigator &&
       </div>
 
       <div class="cn-clue" id="cnClueBox">
-        <div class="row" id="cnClueForm" style="gap:8px">
-          <input class="input grow" id="cnClueW" maxlength="18" placeholder="التلميح (كلمة واحدة)" autocomplete="off" style="min-width:150px">
-          <input class="input num" id="cnClueN" inputmode="numeric" maxlength="1" placeholder="عدد" style="max-width:96px;text-align:center">
-          <button class="btn btn-sky" id="btnCnClue">أعلن التلميح</button>
-        </div>
-        <div class="row" id="cnWaitClue" hidden style="gap:10px;align-items:center">
+        <div class="row" id="cnWaitClue" style="gap:10px;align-items:center">
           <span class="waiting-dots"><i></i><i></i><i></i></span>
           <span class="grow tiny muted" id="cnWaitTxt">ننتظر تلميح صاحب المفتاح من جواله…</span>
           <button class="btn btn-ghost" id="btnCnSkipTurn">⏭ تخطَّ هذا الدور</button>
@@ -1845,7 +2014,6 @@ if ('serviceWorker' in navigator &&
           <span class="cl-w" id="cnClueShow">—</span>
           <span class="cl-n num" id="cnClueNum">0</span>
           <span class="cl-left" id="cnGuessLeft">—</span>
-          <button class="btn btn-ghost" id="btnCnPass">انتهى دورنا ⏭</button>
         </div>
       </div>
 
@@ -1913,6 +2081,7 @@ if ('serviceWorker' in navigator &&
         <span class="chip" id="atRound">الجولة 1 من 5</span>
         <div class="spacer"></div>
         <button class="btn btn-ghost" data-wild="act">🃏 الإشارات</button>
+        <button class="btn btn-ghost watch-btn" data-watch hidden aria-pressed="false">📺 المشاهدة</button>
         <button class="btn btn-ghost" id="btnAtEnd">أنهِ اللعبة</button>
         <div class="timer" id="atTimer" hidden>
           <svg width="80" height="80" viewBox="0 0 80 80"><circle class="trk" cx="40" cy="40" r="34" fill="none" stroke-width="7"></circle><circle class="bar" id="atBar" cx="40" cy="40" r="34" fill="none" stroke-width="7"></circle></svg>
@@ -2018,7 +2187,8 @@ if ('serviceWorker' in navigator &&
         <div class="between">
           <div><span class="eyebrow" id="sjTurnLabel">دور الفريق</span><h2 style="font-size:27px;margin-top:5px" id="sjTurnName">—</h2></div>
           <div class="row">
-            <span class="chip" id="sjLeft">—</span>
+            <button class="btn btn-ghost watch-btn" data-watch hidden aria-pressed="false">📺 المشاهدة</button>
+          <span class="chip" id="sjLeft">—</span>
             <button class="btn btn-ghost" data-wild="sj">🃏 الوسائل</button>
             <button class="btn btn-ghost" id="btnSJEnd">أنهِ اللعبة</button>
           </div>
@@ -2123,6 +2293,7 @@ if ('serviceWorker' in navigator &&
         <span class="bank">🏦 البنك <span class="bk-v num" id="fdBank">0</span></span>
         <div class="spacer grow"></div>
         <span class="chip" id="fdTurn">—</span>
+        <button class="btn btn-ghost watch-btn" data-watch hidden aria-pressed="false">📺 المشاهدة</button>
         <span class="chip live num" id="fdSec" hidden>60</span>
         <div class="strikes" id="fdStrikes"><i>✕</i><i>✕</i><i>✕</i></div>
       </div>
@@ -2330,8 +2501,10 @@ if ('serviceWorker' in navigator &&
         <button class="btn btn-primary btn-lg btn-block" id="btnJoin">ادخل الغرفة</button>
         <p class="tiny muted center" id="joinNote"></p>
         <div class="divider"></div>
-        <button class="btn btn-ghost btn-block" id="btnGoPad">🕶️ لوحة المضيف / مفتاح الشيفرة</button>
-        <p class="tiny muted center">لصاحب المفتاح والمضيف — يعرض ما يجب أن يبقى سرّاً على جوالك وحده، بعيداً عن الشاشة الكبيرة.</p>
+        <button class="btn btn-sky btn-block" id="btnGoWatch">📺 مشاهدة لعبة بشاشة واحدة</button>
+        <p class="tiny muted center">للألعاب التي تُلعب على شاشة واحدة — لوحة النقاط والخزنة ومثّلها وسألنا الناس. اكتب <b>رمز المشاهدة</b> الظاهر على الشاشة الكبيرة فتنعكس اللعبة على جوالك.</p>
+        <button class="btn btn-ghost btn-block" id="btnGoPad" style="margin-top:10px">🕶️ لوحة المضيف / مفتاح الشيفرة</button>
+        <p class="tiny muted center">لصاحب المفتاح والمضيف — يعرض ما يجب أن يبقى سرّاً على جوالك وحده.</p>
       </div>
     </div>
   </section>
@@ -2413,12 +2586,67 @@ if ('serviceWorker' in navigator &&
             <span class="cl-left" id="cnpLeft">—</span>
           </div>
         </div>
+        <div class="cnp-scores" id="cnpScores"></div>
         <div class="cn-board cnp-board" id="cnpBoard"></div>
+        <div class="wilds cnp-wilds" id="cnpWilds" hidden></div>
         <div class="row" style="justify-content:center" id="cnpActions">
           <button class="btn btn-ghost" id="btnCnpPass">انتهى دورنا ⏭</button>
           <button class="btn btn-ghost" data-wild="cn">🃏 الوسائل</button>
         </div>
         <p class="tiny muted center" id="cnpHint">—</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ المشاهد — إدخال الرمز ============ -->
+  <section class="screen" id="screen-vjoin">
+    <div class="phone">
+      <div class="between"><span class="eyebrow">📺 مشاهدة</span><button class="btn btn-ghost" data-go="join">رجوع</button></div>
+      <div class="panel col">
+        <div class="field">
+          <span class="label">رمز المشاهدة</span>
+          <input class="input pin-input num" id="vjPin" inputmode="numeric" autocomplete="off" maxlength="6" placeholder="------" aria-label="رمز المشاهدة">
+        </div>
+        <button class="btn btn-primary btn-lg btn-block" id="btnVjGo">شاهد اللعبة</button>
+        <p class="tiny muted center" id="vjNote">الرمز يظهر على الشاشة الكبيرة بضغط زر <b>«📺 رمز المشاهدة»</b> أعلى اللعبة.</p>
+      </div>
+    </div>
+  </section>
+  <!-- ============ المشاهد — مرآة اللعبة على الجوال ============ -->
+  <section class="screen" id="screen-view">
+    <div class="phone">
+      <div class="p-status">
+        <div class="row" style="gap:9px;min-width:0">
+          <span class="lb-av">📺</span>
+          <div style="min-width:0">
+            <div style="font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" id="vwGame">—</div>
+            <div class="tiny muted">مشاهدة — أنت تتابع فقط</div>
+          </div>
+        </div>
+        <span class="chip" id="vwTurn">—</span>
+      </div>
+
+      <div id="vw-wait" class="col" style="flex:1;justify-content:center;text-align:center;gap:16px">
+        <div class="waiting-dots"><i></i><i></i><i></i></div>
+        <h2 id="vwWaitTitle" style="font-size:23px">متصل بالشاشة</h2>
+        <p class="muted" id="vwWaitText">ننتظر بداية الجولة…</p>
+      </div>
+
+      <div id="vw-live" class="col" style="flex:1" hidden>
+        <div class="vw-chips" id="vwChips"></div>
+        <div class="vw-teams" id="vwTeams"></div>
+        <div class="vw-card" id="vwCard" hidden>
+          <span class="vw-eyebrow" id="vwSub" hidden>—</span>
+          <div class="vw-title" id="vwTitle">—</div>
+        </div>
+        <div class="vw-opts" id="vwOpts"></div>
+        <div class="vw-rows" id="vwRows"></div>
+        <div id="vwNote" hidden></div>
+      </div>
+
+      <div class="row" style="justify-content:center;margin-top:auto">
+        <button class="btn btn-ghost" id="btnVwLeave">غادر المشاهدة</button>
       </div>
     </div>
   </section>
@@ -2502,6 +2730,27 @@ if ('serviceWorker' in navigator &&
       </div>
     </div>
   </section>
+
+<!-- ============ لوحة رمز المشاهدة (تظهر وتختفي بالزر) ============ -->
+<div class="watch-pop" id="watchPop" hidden>
+  <div class="wp-head">
+    <div><span class="eyebrow">📺 المشاهدة على الجوالات</span>
+      <h3 id="watchTitle">امسح الرمز أو اكتبه</h3></div>
+    <button class="icon-btn" id="btnWatchHide" aria-label="إخفاء الرمز">✕</button>
+  </div>
+  <div class="wp-body" id="watchBody">
+    <div class="wp-pin num" id="watchPin">------</div>
+    <div class="qr-wrap" id="watchQrWrap" hidden><canvas id="watchQr"></canvas></div>
+    <p class="tiny muted center" id="watchHow">يفتح المشاهد اللعبة على جواله ← <b>«انضم كلاعب»</b> ← ويكتب الرمز أعلاه.</p>
+    <div class="join-url" id="watchUrl"></div>
+    <div class="row" style="justify-content:center;margin-top:10px">
+      <span class="chip" id="watchState">—</span>
+      <button class="btn btn-ghost" id="btnWatchCopy" hidden>📋 نسخ الرابط</button>
+      <button class="btn btn-sky" id="btnWatchRetry" hidden>🔄 أعد المحاولة</button>
+    </div>
+  </div>
+  <p class="tiny muted center wp-foot">مشاهدة فقط — لا يستطيع المشاهد أن يلعب أو يغيّر شيئاً.</p>
+</div>
 
 </div>
 
@@ -2747,7 +2996,7 @@ if ('serviceWorker' in navigator &&
     </div>
 
     <div id="howOff" hidden>
-      <p class="muted tiny" style="margin-bottom:14px"><b>ما عندك موقع ولا رابط؟ لا يهم.</b> «لوحة النقاط» و«سألنا الناس» و«الخزنة» و«مثّلها» تعمل بالكامل على شاشة واحدة — بلا إنترنت، بلا رابط، وبلا أن يفتح أحد شيئاً على جواله. «مسابقة السهرة» و«الشيفرة» وحدهما تحتاجان جوالات. ملاحظة: <b>«سألنا الناس» يستضيفها لابتوب أو كمبيوتر</b> — المضيف يكتب إجابات الفريق بلوحة المفاتيح وشاشة العرض تُفتح في نافذة ثانية.</p>
+      <p class="muted tiny" style="margin-bottom:14px"><b>ما عندك موقع ولا رابط؟ لا يهم.</b> «لوحة النقاط» و«سألنا الناس» و«الخزنة» و«مثّلها» تعمل بالكامل على شاشة واحدة — بلا إنترنت، بلا رابط، وبلا أن يفتح أحد شيئاً على جواله. <b>وإن توفّر إنترنت</b> ظهر في أعلى اللعبة رمز <b>📺 المشاهدة</b>: يمسحه من كان بعيداً عن الشاشة فتنعكس اللعبة على جواله — مشاهدةً فقط، بلا أن يقدر على اللعب أو تغيير شيء. «مسابقة السهرة» و«الشيفرة» وحدهما تحتاجان جوالات. ملاحظة: <b>«سألنا الناس» يستضيفها لابتوب أو كمبيوتر</b> — المضيف يكتب إجابات الفريق بلوحة المفاتيح وشاشة العرض تُفتح في نافذة ثانية.</p>
       <div class="steps">
         <div class="step"><div><b>«استضف سهرة» ← اختر اللعبة</b><span><b>«لوحة النقاط»</b> لوحة تصنيفات بالنقاط، و<b>«سألنا الناس»</b> تخمين أشهر الإجابات، و<b>«الخزنة»</b> مضاعفة الرصيد والجرأة على السحب.</span></div></div>
         <div class="step"><div><b>اقسموا الحضور فرقاً</b><span>فريقان فقط في ألعاب الفرق — اكتبوا اسم كل فريق ووزّعوا الحضور عليهما.</span></div></div>
@@ -2777,9 +3026,11 @@ if ('serviceWorker' in navigator &&
       <div class="steps">
         <div class="step"><div><b>المضيف: «استضف سهرة» ← «الشيفرة» ← «افتح الغرفة»</b><span>اكتب اسمَي الفريقين ووقت الجولة، ثم افتح الغرفة. يظهر رمز من 6 أرقام و<b>QR</b> على الشاشة الكبيرة.</span></div></div>
         <div class="step"><div><b>كل لاعب ينضم من جواله</b><span>«انضم كلاعب» ← الرمز ← اسمه. الأسماء تظهر فوراً في غرفة التوزيع.</span></div></div>
-        <div class="step"><div><b>القرعة توزّع الفريقين وتسحب صاحب مفتاح لكل فريق</b><span>التوزيع عشوائي بالكامل، والمضيف داخل القرعة مثل الجميع. تقدر تضغط «أعد التوزيع» لقرعة جديدة، أو تنقل لاعباً بين الفريقين بزر ↔، أو تعيّن صاحب المفتاح بنفسك. وإن تأخّر صاحب المفتاح تظهر لك لافتة باسمه ومعها زر «⏭ تخطَّ هذا الدور».</span></div></div>
-        <div class="step"><div><b>صاحب المفتاح يرى الحل على جواله وحده</b><span>الكلمات السرّية تُرسل إلى جهازه فقط ولا تظهر على الشاشة الكبيرة أبداً. يكتب <b>كلمة تلميح واحدة + رقماً</b> ويرسلها من جواله.</span></div></div>
-        <div class="step"><div><b>بقية الفريق يخمّنون من جوالاتهم</b><span>يظهر التلميح على أجهزتهم وعلى الشاشة الكبيرة، ويلمسون الكلمات التي يظنّونها لهم. الكشف يظهر للجميع لحظة وقوعه.</span></div></div>
+        <div class="step"><div><b>الشاشة الكبيرة للعرض فقط — والمضيف يلعب من جواله مثل الجميع</b><span>لا يُلمس شيء على الشاشة الكبيرة: هي تعرض الكلمات والنقاط لا أكثر. من أراد اللعب — والمضيف منهم — يفتح اللعبة على جواله وينضم بالرمز، فيدخل القرعة مثل أي ضيف.</span></div></div>
+        <div class="step"><div><b>القرعة توزّع الفريقين وتسحب صاحب مفتاح لكل فريق</b><span>التوزيع عشوائي بالكامل. تقدر تضغط «أعد التوزيع» لقرعة جديدة، أو تنقل لاعباً بين الفريقين بزر ↔، أو تعيّن صاحب المفتاح بنفسك. وإن تأخّر صاحب المفتاح تظهر لافتة باسمه ومعها زر «⏭ تخطَّ هذا الدور».</span></div></div>
+        <div class="step"><div><b>صاحب المفتاح يرى الحل على جواله وحده</b><span>الكلمات السرّية تُرسل إلى جهازه فقط ولا تظهر على الشاشة الكبيرة أبداً. يكتب <b>كلمة تلميح واحدة + رقماً</b> ويرسلها من جواله. <b>ولا يملك أن يفتح كلمة بنفسه</b> — هو يعرف الحل، فالتخمين لفريقه وحدهم.</span></div></div>
+        <div class="step"><div><b>بقية الفريق يخمّنون من جوالاتهم</b><span>يظهر التلميح على أجهزتهم وعلى الشاشة الكبيرة، ويلمسون الكلمات التي يظنّونها لهم. الكشف يظهر للجميع لحظة وقوعه. والوسائل الخمس تُضغط من جوالاتهم أيضاً.</span></div></div>
+        <div class="step"><div><b>النقاط</b><span>كلمة من كلماتكم <b>+10</b>، وبوسيلة «🔎 كشف كلمة» <b>+5</b>. كلمة محايدة <b>−5</b>. كلمة أهديتموها للخصم <b>−10</b> لكم و<b>+10</b> لهم. الكلمة السوداء <b>−20</b> وخسارة فورية. ومن يكشف كل كلماته يأخذ <b>+50</b> بونص الفوز.</span></div></div>
         <div class="step"><div><b>احذروا الكلمة السوداء</b><span>من يلمسها يخسر الجولة فوراً. ولكل فريق خمس وسائل: 🛡️ درع، 🔎 كشف كلمة، ➕ تخمينة زائدة، 🔒 قفل كلمة، 🕵️ التجسّس — زر 🃏 يشرحها.</span></div></div>
       </div>
       <div class="note-box"><b>لماذا أجهزة متعددة؟</b> لأن سرّ اللعبة أن يرى صاحب المفتاح ما لا يراه فريقه. لو كان الجميع أمام شاشة واحدة لانكشف الحل — ولهذا أُلغي وضع الشاشة الواحدة تماماً.</div>
@@ -15300,11 +15551,14 @@ const MQ = (function () {
   return { Client: Client };
 })();
 
-/* وسطاء عامّون مجانيون بلا حساب — نجرّبهم بالترتيب حتى ينجح واحد */
+/* وسطاء عامّون مجانيون بلا حساب — نجرّبهم بالترتيب حتى ينجح واحد.
+   الترتيب مقصود: الأسرع استجابةً أولاً. وُضع broker.emqx.io أخيراً
+   لأنه صار يرفض الاتصال (CONNACK=3 «الخادم غير متاح») فكان يهدر
+   نحو ثانية في كل فتح غرفة قبل أن ينتقل الدور لغيره. */
 const MQ_BROKERS = [
-  'wss://broker.emqx.io:8084/mqtt',
   'wss://broker.hivemq.com:8884/mqtt',
-  'wss://test.mosquitto.org:8081/mqtt'
+  'wss://test.mosquitto.org:8081/mqtt',
+  'wss://broker.emqx.io:8084/mqtt'
 ];
 /* بادئة طويلة تجعل تخمين مواضيع الغرف عملياً مستحيلاً */
 const MQ_NS = 'sahra-trivia-2f7a9c/';
@@ -15775,26 +16029,45 @@ const Net = (function () {
     }
   }
 
-  /* نجرّب كل الوسطاء في وقت واحد ونأخذ أسرع من يستجيب */
+  /* نجرّب الوسطاء بفاصل قصير بدل فتحهم كلهم دفعة واحدة.
+     الأول يستجيب عادةً قبل أن يُفتح الثاني، فلا تُفتح اتصالات
+     ثم تُغلق بلا داعٍ — وهذه كانت تظهر تحذيرات في سجل المتصفح
+     («WebSocket is closed before the connection is established»)
+     وتبدو كأنها أخطاء وهي ليست كذلك. */
+  const MQ_STAGGER = 1000;
   function tryBrokers() {
     return new Promise(resolve => {
-      let done = false, left = MQ_BROKERS.length;
-      const all = [];
-      const finish = ok => { if (!done) { done = true; resolve(ok); } };
-      MQ_BROKERS.forEach(url => {
+      let done = false, started = 0, settled = 0;
+      const all = [], timers = [];
+      const finish = ok => {
+        if (done) return;
+        done = true;
+        timers.forEach(clearTimeout);
+        resolve(ok);
+      };
+      const maybeFail = () => {
+        if (started === MQ_BROKERS.length && settled === started) finish(false);
+      };
+      function attempt(url) {
+        if (done) return;
+        started++;
         let c;
         try { c = new MQ.Client(url, { onmessage: onMsg, onclose: () => { if (mq === c) reconnect(); } }); }
-        catch (e) { if (--left === 0) finish(false); return; }
+        catch (e) { settled++; maybeFail(); return; }
         all.push(c);
         c.connect().then(() => {
           if (done) { try { c.close(); } catch (e) {} return; }
           mq = c; broker = url; kind = 'p2p';
           all.forEach(x => { if (x !== c) { try { x.close(); } catch (e) {} } });
           finish(true);
-        }).catch(() => { if (--left === 0) finish(false); });
+        }).catch(() => { settled++; maybeFail(); });
+      }
+      MQ_BROKERS.forEach((url, i) => {
+        if (i === 0) attempt(url);
+        else timers.push(setTimeout(() => attempt(url), i * MQ_STAGGER));
       });
       if (!MQ_BROKERS.length) finish(false);
-      setTimeout(() => finish(!!mq), 5200);
+      timers.push(setTimeout(() => finish(!!mq), 7000));
     });
   }
   let reT = null, reTries = 0;
@@ -16550,6 +16823,8 @@ const Player = {
     note.textContent = '';
     /* غرفة الشيفرة لها شاشة لاعب مختلفة */
     if (room.kind === 'cnroom') { await CNP.join(pin, name); return; }
+    /* غرفة مشاهدة: يتابع اللعبة على جواله بلا أن يلعب */
+    if (room.kind === 'viewroom') { await Viewer.join(pin); return; }
     const list = await Net.listPlayers(pin);
     if (list.length >= MAX_PLAYERS) { $('#joinNote').textContent = 'الغرفة ممتلئة.'; return; }
     const id = 'p_' + Math.random().toString(36).slice(2, 9);
@@ -16950,6 +17225,216 @@ const WILDS = [
   { k: 'freeze', ic: '🧊', n: 'تجميد الخصم' }
 ];
 
+/* ============================================================
+   المشاهدة — الألعاب التي تكفيها شاشة واحدة تبثّ صورتها للجوالات
+   من كان بعيداً عن الشاشة يمسح الرمز فيتابع اللعبة على جواله:
+   النقاط والسؤال والكشف لحظة بلحظة. مشاهدة فقط — لا لعب ولا تحكّم.
+   والأسرار تبقى أسراراً: كلمة «مثّلها» وإجابات «سألنا الناس»
+   غير المكشوفة لا تُرسَل أصلاً.
+   ============================================================ */
+const Show = {
+  pin: null, game: '', gname: '', src: null,
+  live: false, busy: false, open: false, err: '', sent: '', _t: null, tickT: null,
+
+  /* تُستدعى عند بدء لعبة تكفيها شاشة واحدة: نُظهر الزر ولا نتّصل بعد.
+     لا داعي لإشغال الشبكة قبل أن يطلب أحدٌ المشاهدة فعلاً. */
+  attach(game, gname, src) {
+    this.detach(true);
+    this.game = game; this.gname = gname; this.src = src;
+    this.paint();
+  },
+
+  /* أول ضغطة على الزر تفتح الغرفة وتبدأ البثّ */
+  async connect() {
+    if (this.live || this.busy || !this.src) return;
+    if (!('WebSocket' in window)) { this.err = 'هذا المتصفح لا يدعم المشاهدة.'; this.paint(); return; }
+    this.busy = true; this.err = ''; this.paint();
+    try { await Net.readyIn(7000); } catch (e) {}
+    this.busy = false;
+    if (!this.src) return;                       /* انتهت اللعبة أثناء الانتظار */
+    if (!Net.online) {
+      this.err = 'تعذّر الوصول إلى الإنترنت — المشاهدة تحتاج اتصالاً. تحقّق من الشبكة ثم أعد المحاولة.';
+      this.paint(); return;
+    }
+    this.pin = String(Math.floor(100000 + Math.random() * 900000));
+    this.live = true; this.sent = '';
+    clearInterval(this.tickT);
+    this.tickT = setInterval(() => Show.tick(), 700);
+    this.tick();
+    this.paint();
+  },
+
+  toggle() {
+    this.open = !this.open;
+    if (this.open) this.connect();
+    this.paint();
+  },
+  hide() { this.open = false; this.paint(); },
+  retry() { this.err = ''; this.connect(); },
+
+  /* لا نُرسل إلا ما تغيّر فعلاً */
+  tick() {
+    if (!this.live || !this.src) return;
+    let v; try { v = this.src(); } catch (e) { return; }
+    if (v) this.push(v);
+  },
+
+  push(v) {
+    if (!this.live || !this.pin) return;
+    const body = Object.assign({ kind: 'viewroom', game: this.game, gname: this.gname }, v);
+    const sig = JSON.stringify(body);
+    if (sig === this.sent) return;
+    this.sent = sig;
+    clearTimeout(this._t);
+    this._t = setTimeout(() => {
+      try { Net.setRoom(Show.pin, Object.assign({ at: Date.now() }, JSON.parse(sig))); } catch (e) {}
+    }, 60);
+  },
+
+  detach(quiet) {
+    clearTimeout(this._t); clearInterval(this.tickT);
+    if (this.pin && this.live && !quiet) {
+      try {
+        Net.setRoom(this.pin, { kind: 'viewroom', at: Date.now(), game: this.game,
+          gname: this.gname, over: true, title: 'انتهت اللعبة',
+          sub: 'شكراً على المتابعة', turn: '🏁 انتهت' });
+      } catch (e) {}
+    }
+    this.pin = null; this.src = null;
+    this.live = false; this.busy = false; this.open = false; this.err = ''; this.sent = '';
+    this.paint();
+  },
+  /* الاسم القديم — تستعمله نهايات الألعاب */
+  close(quiet) { this.detach(quiet); },
+
+  link() {
+    const base = Host.shareBase();
+    if (!base || !this.pin) return '';
+    try { const u = new URL(base); u.hash = '#join=' + this.pin; return u.toString(); }
+    catch (e) { return base.split('#')[0] + '#join=' + this.pin; }
+  },
+
+  paint() {
+    const on = !!this.src;
+    $$('[data-watch]').forEach(b => {
+      b.hidden = !on;
+      b.setAttribute('aria-pressed', this.open ? 'true' : 'false');
+      b.classList.toggle('on', this.open);
+      /* نصّ قصير: رأس اللعبة مزدحم بالشارات، والسطر الثاني يقضم الارتفاع */
+      b.textContent = this.open ? '📺 إخفاء'
+        : this.pin ? '📺 ' + this.pin : '📺 المشاهدة';
+    });
+    const pop = $('#watchPop'); if (!pop) return;
+    pop.hidden = !(on && this.open);
+    if (pop.hidden) return;
+
+    const waiting = this.busy, failed = !!this.err && !this.live;
+    $('#watchTitle').textContent = this.live ? 'امسح الرمز أو اكتبه'
+      : waiting ? 'نجهّز غرفة المشاهدة…' : failed ? 'تعذّر فتح المشاهدة' : 'لحظة…';
+    $('#watchPin').textContent = this.pin || '------';
+    $('#watchPin').hidden = !this.live;
+
+    const link = this.live ? this.link() : '';
+    const ok = !!link && QR.draw($('#watchQr'), link, { size: 190, dark: '#16384F', light: '#FFFFFF' });
+    $('#watchQrWrap').hidden = !ok;
+    $('#watchUrl').textContent = link ? (link.length > 64 ? link.slice(0, 62) + '…' : link) : '';
+    $('#btnWatchCopy').hidden = !link;
+    $('#btnWatchRetry').hidden = !failed;
+    $('#watchHow').innerHTML = failed ? this.err
+      : waiting ? 'نبحث عن وسيط متاح… قد يستغرق ثوانيَ قليلة.'
+      : 'يفتح المشاهد اللعبة على جواله ← <b>«انضم كلاعب»</b> ← <b>«📺 مشاهدة لعبة بشاشة واحدة»</b> ← ويكتب الرمز أعلاه.';
+    const st = $('#watchState');
+    st.textContent = this.live ? '🛰️ يبثّ الآن' : waiting ? '⏳ جارٍ الاتصال' : failed ? '⚠️ غير متصل' : '—';
+    st.className = 'chip' + (this.live ? ' live' : '');
+  },
+
+  /* --- لقطات الألعاب: ما يُعرض على الشاشة الكبيرة، بلا أسرار --- */
+  teamList(arr, on) {
+    return arr.map((t, i) => ({ em: t.em, c: t.c, name: t.name, score: t.score, on: i === on }));
+  },
+  optStates(sel, texts) {
+    const els = $$(sel);
+    return texts.map((t, i) => {
+      const e = els[i];
+      const s = !e ? '' : e.classList.contains('right') ? 'ok'
+        : e.classList.contains('wrongpick') ? 'bad'
+        : e.classList.contains('dim') ? 'dim' : '';
+      return { t, s };
+    });
+  },
+
+  snapSJ() {
+    if (!SJ.teams.length) return null;
+    const teams = Show.teamList(SJ.teams, SJ.turn);
+    const t = SJ.teams[SJ.turn];
+    const left = SJ.board.reduce((n, col) => n + col.tiers.filter(x => !x.done).length, 0);
+    const c = SJ.cur;
+    if (!c || $('#sj-play').hidden) {
+      return { teams, turn: t ? t.em + ' ' + t.name : '', chips: [left + ' خانة متبقية'],
+        sub: 'اختيار الخانة', title: 'يختارون خانتهم الآن…' };
+    }
+    const info = CATS[SJ.board[c.ci].cat];
+    const team = SJ.teams[c.stealing ? c.stealTeam : c.team];
+    return { teams, turn: (c.stealing ? '🎯 ' : '') + team.em + ' ' + team.name,
+      chips: [info.icon + ' ' + info.name, (c.doubled ? c.pts * 2 : c.pts) + ' نقطة'],
+      sub: info.icon + ' ' + info.name, title: c.q.q,
+      opts: Show.optStates('#sjOpts .opt', c.q.o),
+      note: $('#sjStealNote').hidden ? '' : ($('#sjStealText').textContent || '') };
+  },
+
+  snapVault() {
+    if (!Vault.teams.length) return null;
+    const teams = Show.teamList(Vault.teams, Vault.turn);
+    const t = Vault.teams[Vault.turn], c = Vault.cur;
+    if (!c) {
+      return { teams, turn: t ? t.em + ' ' + t.name : '', chips: ['الجولة ' + Vault.round],
+        sub: 'دور جديد', title: 'يستعدّون لدخول الخزنة…' };
+    }
+    const chips = ['الجولة ' + Vault.round, 'رصيد الخزنة ' + c.pot];
+    if (c.curse) chips.push('💀 سؤال ملعون');
+    if (c.phase !== 'q') {
+      return { teams, turn: t ? t.em + ' ' + t.name : '', chips,
+        sub: 'رصيد الخزنة', title: String(c.pot),
+        note: 'يقرّرون: يكملون أم يسحبون؟' };
+    }
+    return { teams, turn: t ? t.em + ' ' + t.name : '', chips,
+      sub: 'رصيد الخزنة ' + c.pot, title: c.q.q,
+      opts: Show.optStates('#vOpts .opt', c.q.o) };
+  },
+
+  snapFeud() {
+    const c = Feud.cur; if (!c || !Feud.teams.length) return null;
+    const team = Feud.active();
+    const i = Feud.teams.indexOf(team);
+    return {
+      teams: Show.teamList(Feud.teams, i),
+      turn: (c.stealing ? '🎯 ' : '') + team.em + ' ' + team.name,
+      chips: ['الجولة ' + (Feud.round + 1) + ' من ' + Feud.cfg.rounds,
+        c.mult === 3 ? '×3' : c.mult === 2 ? '×2' : 'عادي',
+        'البنك ' + c.bank, 'ضربات ' + c.strikes + ' من 3'],
+      sub: 'سألنا 100 شخص…', title: c.s.q,
+      /* المكشوف فقط — الإجابات المخفيّة لا تغادر شاشة المضيف */
+      rows: c.s.a.map((row, k) => c.open[k]
+        ? { l: row[0], r: String(row[1] * c.mult), open: true }
+        : { l: '••••••', r: '؟', open: false }),
+      note: $('#fdNote').hidden ? '' : ($('#fdNote').textContent || '').trim()
+    };
+  },
+
+  snapAct() {
+    if (!Act.teams || !Act.teams.length) return null;
+    const teams = Show.teamList(Act.teams, Act.turn);
+    const t = Act.teams[Act.turn];
+    const live = !$('#atCard').hidden;
+    return { teams, turn: t ? t.em + ' ' + t.name : '',
+      chips: ['الجولة ' + Act.round, live ? '✅ ' + (Act.got || 0) + ' في هذا الدور' : 'استعداد'],
+      sub: live ? '🎭 يمثّل الآن' : '🎭 مثّلها',
+      /* الكلمة سرّ الممثّل — لا تُرسل أبداً */
+      title: live ? ($('#atActor').textContent || 'الممثّل') + ' يمثّل الآن…' : 'ينتظرون الممثّل',
+      note: live ? 'الكلمة على جوال الممثّل وحده — خمّنوا معهم!' : '' };
+  }
+};
+
 const SJ = {
   cfg: { teams: 2, time: 30, steal: 1, cats: [] },  /* فريقان دائماً */
   teams: [], turn: 0, board: [], cur: null, timerT: null, lastSec: 99,
@@ -17000,6 +17485,7 @@ const SJ = {
     this.turn = 0; this.cur = null;
     $('#modeChip').hidden = false; $('#modeChip').textContent = '🎯 لوحة النقاط';
     freshLook(); this.showBoard(); go('sj'); Snd.join();
+    Show.attach('sj', 'لوحة النقاط', Show.snapSJ);
     Coin.flip(this.teams, w => { SJ.turn = w; SJ.showBoard(); });
   },
 
@@ -17222,7 +17708,7 @@ const SJ = {
   },
 
   finish() {
-    Pad.stop();
+    Pad.stop(); Show.close();
     clearInterval(this.timerT);
     teamEnd(this.teams, { eyebrow: 'انتهت اللوحة', again: '🔁 لوحة جديدة', back: 'sjsetup' });
   }
@@ -17467,6 +17953,7 @@ const Feud = {
     this.round = 0; this.turn = 0;
     $('#modeChip').hidden = false; $('#modeChip').textContent = '👨‍👩‍👧‍👦 سألنا الناس';
     go('feud'); Pad.host(); this.setPrivacy(this.privacy); this.newRound(); Snd.join();
+    Show.attach('feud', 'سألنا الناس', Show.snapFeud);
     Coin.flip(this.teams, w => { Feud.turn = w; if (Feud.cur) { Feud.cur.team = w; Feud.paint(); } });
   },
 
@@ -17753,7 +18240,7 @@ const Feud = {
   },
 
   finish() {
-    clearInterval(this.timerT);
+    clearInterval(this.timerT); Show.close();
     teamEnd(this.teams, { eyebrow: 'انتهت الجولات', again: '🔁 لعبة جديدة', back: 'feudsetup' });
   }
 };
@@ -18023,7 +18510,7 @@ function leaveAll() {
   clearInterval(SJ.timerT); clearInterval(Feud.timerT); clearInterval(CN.timerT); clearInterval(CN.rollT); clearInterval(Vault.timerT);
   Feud.cur = null; CN.over = true; CN.board = []; CN.stop(); CNP.leave();
   Vault.over = true; Vault.cur = null;
-  Pad.stop(); Pad.leave(); CNPad.stop();
+  Pad.stop(); Pad.leave(); CNPad.stop(); Show.close(); Viewer.leave();
   S.botTimers.forEach(clearTimeout); S.botTimers = [];
   S.role = null; S.room = null; S.pin = null; S.me = null; S.players = []; SJ.cur = null;
   S.meId = null; S.meAns = -1; Host.hbFor = null; Host.resetPowers();
@@ -18132,6 +18619,7 @@ const Vault = {
     this.turn = 0; this.round = 1; this.over = false; this.lastBank = null; this.cur = null;
     $('#modeChip').hidden = false; $('#modeChip').textContent = '🔐 الخزنة';
     go('vault'); Snd.join(); this.intro();
+    Show.attach('vault', 'الخزنة', Show.snapVault);
     Coin.flip(this.teams, w => { Vault.turn = w; Vault.intro(); });
   },
 
@@ -18402,7 +18890,7 @@ const Vault = {
   },
 
   finish() {
-    this.over = true; clearInterval(this.timerT); this.cur = null;
+    this.over = true; clearInterval(this.timerT); this.cur = null; Show.close();
     teamEnd(this.teams, { eyebrow: 'أُغلقت الخزنة', again: '🔁 خزنة جديدة', back: 'vsetup' });
   }
 };
@@ -18414,6 +18902,9 @@ const CN_TEAMS = [
   { em: '🦁', c: '#FF6A5A', n: 'الفريق الأحمر' },
   { em: '🦅', c: '#2E9BFF', n: 'الفريق الأزرق' }
 ];
+/* نقاط الشيفرة — معلنة في اللعبة نفسها حتى يفهمها الجميع */
+const CN_PTS = { hit: 10, reveal: 5, neutral: -5, gift: -10, black: -20, win: 50 };
+const fmtPts = n => (n > 0 ? '+' + n : String(n)) + ' نقطة';
 const CN_WILDS = [
   { k: 'shield', ic: '🛡️', n: 'درع' },
   { k: 'reveal', ic: '🔎', n: 'كشف كلمة' },
@@ -18474,27 +18965,13 @@ const CN = {
     try { await Net.setRoom(this.pin, { kind: 'cnroom', phase: 'lobby', at: Date.now(),
       teams: this.teams.map(x => ({ em: x.em, c: x.c, name: x.name })) }); } catch (e) {}
     this.watch();
-    await this.joinHost();
     go('cnlobby'); this.paintQR(); this.paintSplit(); Snd.join();
   },
 
-  /* المضيف يشارك دائماً: يُضاف تلقائياً إلى الغرفة ويدخل القرعة مثل الجميع */
-  async joinHost() {
-    this.hostId = 'host_' + Math.random().toString(36).slice(2, 8);
-    const name = (S.meName && S.meName.trim()) || 'المضيف';
-    try {
-      await Net.setPlayer(this.pin, this.hostId, {
-        id: this.hostId, name, host: true, joined: Date.now() - 1
-      });
-    } catch (e) {}
-  },
-
-  /* مفتاح المضيف حين تسحبه القرعة — مموّه على الشاشة الكبيرة */
-  hostKey: null,
+  /* الشاشة الكبيرة عرضٌ فقط. من أراد اللعب — والمضيف منهم — ينضمّ
+     من جواله بالرمز نفسه، فلا يملك أحد امتيازاً على أحد. */
   paintHostKey() {
-    const box = $('#cnHostKey'); if (!box) return;
-    const me = this.players.find(p => p.id === this.hostId);
-    box.hidden = !(me && me.keeper);
+    const box = $('#cnHostKey'); if (box) box.hidden = false;
   },
 
   watch() {
@@ -18587,8 +19064,8 @@ const CN = {
     const ok = this.teams.every((t, i) => this.players.some(p => p.team === i));
     $('#btnCnGo').disabled = !ok;
     $('#cnLobbyNote').innerHTML = ok
-      ? 'التوزيع عشوائي: يقسم اللاعبين فريقين ويسحب <b>صاحب مفتاح</b> لكل فريق — والمضيف 👑 داخل القرعة مثل الجميع. اضغط «أعد التوزيع» لقرعة جديدة.'
-      : 'ينتظر لاعباً واحداً على الأقل في كل فريق. اطلب من الباقين فتح اللعبة على جوالاتهم والانضمام بالرمز.';
+      ? 'التوزيع عشوائي: يقسم اللاعبين فريقين ويسحب <b>صاحب مفتاح</b> لكل فريق. اضغط «أعد التوزيع» لقرعة جديدة.'
+      : 'ينتظر لاعباً واحداً على الأقل في كل فريق. افتحوا اللعبة على جوالاتكم وانضمّوا بالرمز — <b>المضيف مثل الجميع</b>.';
   },
 
 
@@ -18611,16 +19088,16 @@ const CN = {
   },
 
   /* الحالة العامة التي يراها كل اللاعبين — بلا مفتاح */
-  publish() {
+  publish(now) {
     if (!this.online || !this.pin) return;
     clearTimeout(this._pt);
-    this._pt = setTimeout(() => {
+    const send = () => {
       const c = CN;
       const keeper = c.players.find(p => p.team === c.turn && p.keeper);
       try {
         Net.setRoom(c.pin, {
           kind: 'cnroom', phase: c.over ? 'end' : 'play', at: Date.now(),
-          teams: c.teams.map(x => ({ em: x.em, c: x.c, name: x.name })),
+          teams: c.teams.map(x => ({ em: x.em, c: x.c, name: x.name, score: x.score, w: x.w })),
           turn: c.turn, round: c.round, left: c.left.slice(), over: !!c.over,
           keeper: keeper ? keeper.id : '', keeperName: keeper ? keeper.name : '',
           clue: c.clue ? { w: c.clue.w, n: c.clue.n, left: c.clue.left } : null,
@@ -18628,28 +19105,32 @@ const CN = {
           note: c.lastNote || ''
         });
       } catch (e) {}
-    }, 40);
+    };
+    /* النهاية تُرسل فوراً: الإيقاف يلغي أي إرسال مؤجّل */
+    if (now) send(); else this._pt = setTimeout(send, 40);
   },
 
   applyAct(p, a) {
     if (this.over) return;
     if (a.t === 'clue') {
       if (p.team !== this.turn || !p.keeper || this.clue) return;
-      $('#cnClueW').value = a.w; $('#cnClueN').value = String(a.n);
-      this.declare();
+      this.declare(a.w, a.n);
     } else if (a.t === 'guess') {
+      /* صاحب المفتاح يعرف الحل — فلا يُسمح له بفتح أي كلمة أبداً */
       if (p.team !== this.turn || p.keeper || !this.clue) return;
       this.open(a.i, false);
     } else if (a.t === 'pass') {
-      if (p.team !== this.turn) return;
+      if (p.team !== this.turn || p.keeper) return;
       this.pass();
+    } else if (a.t === 'wild') {
+      /* الوسائل يطلبها لاعبو الفريق صاحب الدور (لا صاحب المفتاح) */
+      if (p.team !== this.turn || p.keeper) return;
+      this.useWild(a.w);
     }
   },
 
   stop() {
     try { if (this.unsubP) this.unsubP(); } catch (e) {}
-    try { if (this.pin && this.hostId) Net.delPlayer(this.pin, this.hostId); } catch (e) {}
-    this.hostId = null;
     this.unsubP = null; clearTimeout(this._pt);
   },
 
@@ -18672,16 +19153,12 @@ const CN = {
     this.drawKeeper();
     freshLook();
     $('#cnNote').hidden = true;
-    /* التلميح يُرسل من جوال صاحب المفتاح — إلا إن كان المضيف نفسه هو صاحب المفتاح */
-    const mine = this.players.some(p => p.id === this.hostId && p.keeper && p.team === this.turn);
-    $('#cnClueForm').hidden = !mine;
-    /* وإن كان المفتاح عند لاعب آخر: نُظهر أننا ننتظره، مع مخرج لو تعطّل جواله */
-    $('#cnWaitClue').hidden = mine;
+    /* التلميح يأتي دائماً من جوال صاحب المفتاح — الشاشة الكبيرة تنتظر فقط */
+    $('#cnWaitClue').hidden = false;
     $('#cnWaitTxt').textContent = this.keeper
       ? 'ننتظر تلميح ' + this.keeper.n + ' من جواله…'
       : 'ننتظر تلميح صاحب المفتاح من جواله…';
     $('#cnClueLive').hidden = true;
-    $('#cnClueW').value = ''; $('#cnClueN').value = '';
     this.rollKeeper();
     this.paint();
     CNPad.push(); this.publish();
@@ -18703,46 +19180,35 @@ const CN = {
     $('#cnLeft').textContent = `متبقٍ: ${this.teams[0].em} ${this.left[0]} · ${this.teams[1].em} ${this.left[1]}`;
     $('#cnTeamEm').textContent = t.em;
     $('#cnTeamName').textContent = t.name;
-    $('#cnScoreA').innerHTML = `${this.teams[0].em} <span class="num">${this.left[0]}</span>`;
-    $('#cnScoreB').innerHTML = `${this.teams[1].em} <span class="num">${this.left[1]}</span>`;
+    /* النقاط هي المقياس، وعدد الكلمات المتبقية تحتها */
+    $('#cnScoreA').innerHTML = `${this.teams[0].em} <span class="num">${this.teams[0].score}</span><small>${this.left[0]} كلمة</small>`;
+    $('#cnScoreB').innerHTML = `${this.teams[1].em} <span class="num">${this.teams[1].score}</span><small>${this.left[1]} كلمة</small>`;
     this.paintBoard(); this.paintWilds();
     this.publish();
   },
 
+  /* الشاشة الكبيرة عرضٌ فقط: لا أحد يفتح كلمة بلمسها هنا.
+     الفتح يأتي من جوالات لاعبي الفريق (عدا صاحب المفتاح). */
   paintBoard() {
-    /* المضيف صاحب المفتاح ولم يفتح جواله: نعرض له المفتاح مموّهاً على الشاشة الكبيرة */
-    const hostKeeper = this.players.some(p => p.id === this.hostId && p.keeper && p.team === this.turn);
-    const showKey = hostKeeper && !this.over;
     const b = $('#cnBoard');
-    b.className = 'cn-board' + (showKey ? ' peekmode blur' + (this.peek ? ' peek' : '') : '');
+    b.className = 'cn-board';
     b.innerHTML = this.board.map((c, i) => {
       const kc = c.k === 0 ? 'k0' : c.k === 1 ? 'k1' : c.k === 'n' ? 'kn' : 'kb';
       const oc = c.open ? ' open ' + (c.k === 0 ? 't0' : c.k === 1 ? 't1' : c.k === 'n' ? 'neutral' : 'black') : '';
       const lk = c.locked && !c.open;
-      return `<button class="cn-card ${kc}${oc}${lk ? ' locked' : ''}" data-i="${i}" ${c.open || this.over || !this.clue || lk ? 'disabled' : ''}>
+      return `<div class="cn-card show ${kc}${oc}${lk ? ' locked' : ''}" data-i="${i}">
         <span class="cn-w">${esc(c.w)}${lk ? ' 🔒' : ''}</span>
         ${c.open ? `<span class="cn-tag">${c.k === 'b' ? '⬛' : c.k === 'n' ? '◻︎' : this.teams[c.k].em}</span>` : ''}
-      </button>`;
+      </div>`;
     }).join('');
-    $$('#cnBoard .cn-card:not([disabled])').forEach(el =>
-      el.addEventListener('click', () => CN.tap(+el.dataset.i)));
   },
 
+  /* الوسائل تُعرض للجميع، وتُضغط من جوالات الفريق صاحب الدور */
   paintWilds() {
     const t = this.team(), live = !this.over;
     $('#cnWilds').innerHTML = CN_WILDS.map(w => `
-      <button class="wild" data-w="${w.k}" style="--c:${t.c}" ${!live || !t.w[w.k] ? 'disabled' : ''}>
-        ${w.ic} ${w.n}</button>`).join('') +
-      (this.players.some(p => p.id === this.hostId && p.keeper && p.team === this.turn)
-        ? ' <button class="wild" id="cnPeek" style="--c:' + t.c + '">👁️ اكشف مفتاحي (المضيف)</button>' : '');
-    $$('#cnWilds .wild[data-w]').forEach(el => el.addEventListener('click', () => CN.useWild(el.dataset.w)));
-    const pk = $('#cnPeek');
-    if (pk) {
-      const on = () => { CN.peek = true; CN.paintBoard(); };
-      const off = () => { CN.peek = false; CN.paintBoard(); };
-      pk.addEventListener('pointerdown', on); pk.addEventListener('pointerup', off);
-      pk.addEventListener('pointerleave', off); pk.addEventListener('touchend', off);
-    }
+      <span class="wild show${!live || !t.w[w.k] ? ' spent' : ''}" style="--c:${t.c}">
+        ${w.ic} ${w.n}</span>`).join('');
   },
 
   useWild(k) {
@@ -18780,16 +19246,15 @@ const CN = {
     this.paintWilds(); CNPad.push();
   },
 
-  declare() {
-    if (this.over) return;
-    const w = ($('#cnClueW').value || '').trim();
-    const n = parseInt($('#cnClueN').value, 10);
-    if (!w) { $('#cnClueW').focus(); toast('اكتب التلميح'); return; }
-    if (/\s/.test(w)) { toast('التلميح كلمة واحدة فقط'); return; }
-    if (!(n >= 0 && n <= 9)) { $('#cnClueN').focus(); toast('اكتب رقماً من 0 إلى 9'); return; }
+  /* التلميح يصل من جوال صاحب المفتاح فقط */
+  declare(rawW, rawN) {
+    if (this.over || this.clue) return;
+    const w = String(rawW == null ? '' : rawW).trim();
+    const n = parseInt(rawN, 10);
+    if (!w || /\s/.test(w) || !(n >= 0 && n <= 9)) return;
     const bonus = this.extra ? 1 : 0; this.extra = false;
     this.clue = { w, n, left: (n === 0 ? 9 : n + 1) + bonus };
-    $('#cnClueForm').hidden = true; $('#cnWaitClue').hidden = true;
+    $('#cnWaitClue').hidden = true;
     $('#cnClueLive').hidden = false;
     $('#cnClueShow').textContent = w;
     $('#cnClueNum').textContent = n;
@@ -18810,6 +19275,7 @@ const CN = {
     c.open = true;
     const t = this.team();
     if (c.k === 'b') {
+      t.score += CN_PTS.black;
       Snd.wrong(); this.paintBoard();
       this.finish(1 - this.turn, `⬛ ${t.name} لمسوا الكلمة السوداء`);
       return;
@@ -18817,14 +19283,22 @@ const CN = {
     if (c.k === 0 || c.k === 1) this.left[c.k]--;
     let endTurn = false, msg = '';
     if (c.k === this.turn) {
+      /* كلمة صحيحة: كاملة إن خُمّنت، ونصفها إن جاءت بوسيلة «كشف» */
+      const gain = viaWild ? CN_PTS.reveal : CN_PTS.hit;
+      t.score += gain;
       Snd.correct(); Confetti.burst(34, [t.c, '#ffffff']);
-      msg = `✅ ${t.name} أصابوا «${c.w}»`;
+      msg = `✅ ${t.name} أصابوا «${c.w}» ${fmtPts(gain)}`;
       if (!viaWild && this.clue) { this.clue.left--; if (this.clue.left <= 0) endTurn = true; }
     } else if (c.k === 'n') {
-      Snd.wrong(); msg = `◻︎ «${c.w}» كلمة محايدة`;
+      t.score += CN_PTS.neutral;
+      Snd.wrong(); msg = `◻︎ «${c.w}» كلمة محايدة ${fmtPts(CN_PTS.neutral)}`;
       endTurn = true;
     } else {
-      Snd.steal(); msg = `🎁 «${c.w}» كانت من كلمات ${this.teams[c.k].name}!`;
+      /* أهدوا الخصم كلمة: يخسرون، ويكسب الخصم مثل ما يكسب بكلمته */
+      t.score += CN_PTS.gift;
+      this.teams[c.k].score += CN_PTS.hit;
+      Snd.steal();
+      msg = `🎁 «${c.w}» كانت من كلمات ${this.teams[c.k].name}! ${fmtPts(CN_PTS.gift)} لكم، ${fmtPts(CN_PTS.hit)} لهم`;
       endTurn = true;
     }
     if (endTurn && this.shield) { this.shield = false; endTurn = false; msg += ' — 🛡️ الدرع حماكم، أكملوا'; }
@@ -18867,13 +19341,11 @@ const CN = {
 
   finish(winner, why) {
     this.over = true; clearInterval(this.timerT); CNPad.stop();
-    this.publish(); this.stop();
+    if (this.teams[winner]) this.teams[winner].score += CN_PTS.win;
+    this.publish(true); this.stop();
     this.board.forEach(c => { c.open = true; });
     this.paintBoard();
-    const list = this.teams.map((t, i) => ({
-      em: t.em, c: t.c, name: t.name,
-      score: i === winner ? 9 - this.left[i] + 100 : 9 - this.left[i]
-    }));
+    const list = this.teams.map(t => ({ em: t.em, c: t.c, name: t.name, score: t.score }));
     setTimeout(() => teamEnd(list, { eyebrow: why, again: '🔁 لوحة جديدة', back: 'cnsetup' }), 900);
   }
 };
@@ -19044,10 +19516,17 @@ const Pad = {
    نقيس الارتفاع الطبيعي، ثم نصغّر بلطف حتى يتّسع بلا تمرير
    ============================================================ */
 const Fit = {
-  /* لا نصغّر أبداً تحت حدّ القراءة — وإن لم يتّسع فالتمرير أرحم من نصّ لا يُقرأ */
-  MIN: 0.88,
+  /* لا نصغّر أبداً تحت حدّ القراءة — وإن لم يتّسع فالتمرير أرحم من نصّ لا يُقرأ.
+     في شاشات اللعب وحدها نسمح على الجوال بتصغير أعمق: التمرير هناك
+     يقطع اللعبة في منتصفها، بينما تمرير قائمة أو شاشة إعداد أمر طبيعي
+     لا يستحق أن نُصغّر النصّ من أجله. */
+  PLAY: ['game', 'sj', 'feud', 'cn', 'cnp', 'vault', 'at', 'play', 'view'],
   ON: ['game', 'sj', 'feud', 'cn', 'cnp', 'cnlobby', 'vault', 'podium', 'sjend', 'play', 'lobby',
-       'mode', 'setup', 'sjsetup', 'feudsetup', 'cnsetup', 'vsetup', 'join', 'home'],
+       'mode', 'setup', 'sjsetup', 'feudsetup', 'cnsetup', 'vsetup', 'join', 'home',
+       'at', 'atsetup', 'view'],
+  minFor(name) {
+    return (innerWidth <= 560 && this.PLAY.indexOf(name) >= 0) ? 0.76 : 0.88;
+  },
   raf: null, ro: null,
   boxOf(name) {
     const sc = document.getElementById('screen-' + name); if (!sc) return null;
@@ -19073,7 +19552,7 @@ const Fit = {
     box.style.flex = 'none'; box.style.height = 'auto';
     const nat = box.scrollHeight;
     if (nat <= avail + 2) { this.clear(box); return; }
-    const s = Math.max(this.MIN, avail / nat);
+    const s = Math.max(this.minFor(S.screen), avail / nat);
     box.style.transformOrigin = 'top center';
     box.style.transform = 'scale(' + s.toFixed(4) + ')';
     box.style.height = Math.ceil(nat * s) + 'px';
@@ -19604,6 +20083,7 @@ const Act = {
     this.round = 1; this.turn = 0; this.turnsDone = 0; this.over = false;
     $('#modeChip').hidden = false; $('#modeChip').textContent = '🎭 مثّلها';
     go('at'); Snd.join();
+    Show.attach('at', 'مثّلها', Show.snapAct);
     Coin.flip(this.teams, w => { Act.turn = w; Act.newTurn(); });
   },
 
@@ -19710,7 +20190,7 @@ const Act = {
     }, 2600);
   },
   finish() {
-    this.over = true; clearInterval(this.timerT);
+    this.over = true; clearInterval(this.timerT); Show.close();
     const list = this.teams.map(t => ({ em: t.em, c: t.c, name: t.name, score: t.score }));
     setTimeout(() => teamEnd(list, { eyebrow: 'انتهى التمثيل', again: '🔁 جولة جديدة', back: 'atsetup' }), 700);
   },
@@ -19821,6 +20301,27 @@ const CNP = {
     }
     $('#btnCnpPass').hidden = !(mine && !me.keeper && r.clue);
 
+    /* النقاط الحيّة أمام كل لاعب */
+    $('#cnpScores').innerHTML = (r.teams || []).map((t, i) => `
+      <div class="cps${i === r.turn ? ' on' : ''}" style="--tc:${t.c}">
+        <span class="cps-em">${t.em}</span>
+        <span class="cps-n num">${t.score == null ? 0 : t.score}</span>
+        <small>${(r.left && r.left[i] != null) ? r.left[i] + ' كلمة' : ''}</small>
+      </div>`).join('');
+
+    /* الوسائل يضغطها لاعبو الفريق صاحب الدور — لا صاحب المفتاح */
+    const canWild = mine && !me.keeper && !r.over;
+    const wrap = $('#cnpWilds');
+    wrap.hidden = !canWild;
+    if (canWild) {
+      const own = (r.teams && r.teams[me.team] && r.teams[me.team].w) || {};
+      wrap.innerHTML = CN_WILDS.map(w => `
+        <button class="wild" data-w="${w.k}" style="--c:${team ? team.c : '#7C5CFF'}"
+          ${own[w.k] ? '' : 'disabled'}>${w.ic} ${w.n}</button>`).join('');
+      $$('#cnpWilds .wild[data-w]').forEach(el =>
+        el.addEventListener('click', () => CNP.send('wild', -1, el.dataset.w)));
+    }
+
     const canTap = mine && !me.keeper && !!r.clue;
     $('#cnpBoard').innerHTML = (r.words || []).map((x, i) => {
       const k = x.o ? x.k : (me.keeper && this.key ? this.key[i] : null);
@@ -19864,6 +20365,101 @@ const CNP = {
     try { if (this.unsubP) this.unsubP(); } catch (e) {}
     try { if (this.pin && this.id) Net.delPlayer(this.pin, this.id); } catch (e) {}
     this.unsub = this.unsubP = null; this.pin = this.id = this.me = this.room = this.key = null;
+  }
+};
+
+/* ============================================================
+   المشاهد — مرآة الشاشة الكبيرة على الجوال
+   يقرأ الحالة المعلنة ويرسمها. لا يُرسل شيئاً ولا يملك زراً يؤثّر.
+   ============================================================ */
+const Viewer = {
+  pin: null, unsub: null,
+
+  /* دخول المشاهد برمزه من شاشة «📺 مشاهدة لعبة» */
+  async enter() {
+    const btn = $('#btnVjGo'), lbl = btn.textContent, note = $('#vjNote');
+    const pin = ($('#vjPin').value || '').replace(/\D/g, '').slice(0, 6);
+    if (pin.length !== 6) { toast('اكتب رمز المشاهدة (٦ أرقام)'); $('#vjPin').focus(); return; }
+    btn.disabled = true; btn.textContent = '⏳ جارٍ الاتصال…';
+    note.textContent = 'نبحث عن الشاشة… الوسطاء العامّون يتأخّرون أحياناً بضع ثوانٍ.';
+    try { await Net.readyIn(7000); } catch (e) {}
+    let room = await Net.getRoom(pin, sec => { btn.textContent = '⏳ نبحث… ' + sec + 'ث'; });
+    if (!room) {
+      btn.textContent = '🔄 نعيد المحاولة…';
+      try { await Net.retryLink(); } catch (e) {}
+      room = await Net.getRoom(pin, sec => { btn.textContent = '⏳ نبحث… ' + sec + 'ث'; });
+    }
+    btn.disabled = false; btn.textContent = lbl;
+    if (!room) {
+      note.innerHTML = 'لا توجد شاشة بهذا الرمز. تأكّد أن المضيف ضغط <b>«📺 رمز المشاهدة»</b> على الشاشة الكبيرة وأن الرمز ما زال ظاهراً.';
+      return;
+    }
+    if (room.kind !== 'viewroom') {
+      note.innerHTML = 'هذا رمز <b>غرفة لعب</b> لا رمز مشاهدة — ارجع واستخدم «انضم كلاعب» لتلعب معهم.';
+      return;
+    }
+    note.textContent = '';
+    await this.join(pin);
+  },
+
+  async join(pin) {
+    this.leave();
+    this.pin = pin;
+    $('#modeChip').hidden = false; $('#modeChip').textContent = '📺 مشاهدة';
+    go('view'); Snd.join();
+    this.unsub = Net.onRoom(pin, r => { if (r && r.kind === 'viewroom') Viewer.render(r); });
+  },
+
+  render(r) {
+    $('#vwGame').textContent = r.gname || 'سهرة';
+    $('#vwTurn').textContent = r.turn || (r.over ? '🏁 انتهت' : '⏳ الانتظار');
+    $('#vwTurn').className = 'chip' + (r.over ? '' : ' live');
+
+    const empty = !r.title && !(r.teams && r.teams.length);
+    $('#vw-wait').hidden = !empty;
+    $('#vw-live').hidden = empty;
+    if (empty) {
+      $('#vwWaitTitle').textContent = r.over ? 'انتهت اللعبة' : 'متصل بالشاشة';
+      $('#vwWaitText').textContent = r.over ? 'شوفوا النتيجة على الشاشة الكبيرة.' : 'ننتظر بداية الجولة…';
+      return;
+    }
+
+    $('#vwChips').innerHTML = (r.chips || []).map(c => `<span class="chip">${esc(c)}</span>`).join('');
+    $('#vwTeams').innerHTML = (r.teams || []).map(t => `
+      <div class="vwt${t.on ? ' on' : ''}" style="--tc:${t.c}">
+        <span class="vwt-em">${esc(t.em || '')}</span>
+        <span class="vwt-n">${esc(t.name || '')}</span>
+        <span class="vwt-s num">${t.score == null ? '' : t.score}</span>
+      </div>`).join('');
+
+    const card = $('#vwCard');
+    card.hidden = !r.title;
+    if (r.title) {
+      $('#vwTitle').textContent = r.title;
+      const sub = $('#vwSub');
+      sub.hidden = !r.sub; sub.textContent = r.sub || '';
+    }
+
+    $('#vwOpts').innerHTML = (r.opts || []).map((o, i) => `
+      <div class="vwo ${o.s || ''}" style="--c:${(ACOLORS[i] || {}).b || '#7C5CFF'}">
+        <span class="sh">${SHAPES[i] || ''}</span><span class="lbl">${esc(o.t)}</span>
+      </div>`).join('');
+
+    $('#vwRows').innerHTML = (r.rows || []).map((x, i) => `
+      <div class="vwr${x.open ? ' open' : ''}">
+        <span class="vwr-n">${i + 1}</span>
+        <span class="vwr-l">${esc(x.l)}</span>
+        <span class="vwr-r num">${esc(x.r)}</span>
+      </div>`).join('');
+
+    const n = $('#vwNote');
+    n.hidden = !r.note;
+    if (r.note) n.innerHTML = `<div class="feud-note">ℹ️ <span>${esc(r.note)}</span></div>`;
+  },
+
+  leave() {
+    try { if (this.unsub) this.unsub(); } catch (e) {}
+    this.unsub = null; this.pin = null;
   }
 };
 
@@ -20330,11 +20926,30 @@ function boot() {
   $('#cnpClueN').addEventListener('keydown', e => { if (e.key === 'Enter') CNP.sendClue(); });
   $('#cnpClueW').addEventListener('keydown', e => { if (e.key === 'Enter') $('#cnpClueN').focus(); });
   $('#btnCnpPass').addEventListener('click', () => CNP.send('pass'));
-  $('#btnCnClue').addEventListener('click', () => CN.declare());
-  $('#cnClueN').addEventListener('keydown', e => { if (e.key === 'Enter') CN.declare(); });
-  $('#cnClueW').addEventListener('keydown', e => { if (e.key === 'Enter') $('#cnClueN').focus(); });
-  $('#btnCnPass').addEventListener('click', () => CN.pass());
-  $('#btnCnEnd').addEventListener('click', () => { if (!CN.over) CN.finish(CN.left[0] <= CN.left[1] ? 0 : 1, 'أُنهيت اللعبة'); });
+  /* زرّ رمز المشاهدة: يُظهر الرمز ويُخفيه، ويفتح الغرفة عند أول ضغطة */
+  $$('[data-watch]').forEach(b => b.addEventListener('click', () => { Snd.pick(); Show.toggle(); }));
+  $('#btnWatchHide').addEventListener('click', () => { Snd.pick(); Show.hide(); });
+  $('#btnWatchRetry').addEventListener('click', () => { Snd.pick(); Show.retry(); });
+  $('#btnWatchCopy').addEventListener('click', async () => {
+    const link = Show.link(); if (!link) return;
+    try { await navigator.clipboard.writeText(link); toast('تم نسخ رابط المشاهدة'); }
+    catch (e) { toast('انسخ الرابط من شريط العنوان'); }
+  });
+  $('#btnVwLeave').addEventListener('click', () => { Viewer.leave(); leaveAll(); go('home'); });
+
+  /* «📺 مشاهدة لعبة» في شاشة الانضمام */
+  $('#btnGoWatch').addEventListener('click', () => {
+    Snd.pick(); go('vjoin');
+    setTimeout(() => { try { $('#vjPin').focus(); } catch (e) {} }, 220);
+  });
+  $('#btnVjGo').addEventListener('click', () => Viewer.enter());
+  $('#vjPin').addEventListener('keydown', e => { if (e.key === 'Enter') Viewer.enter(); });
+
+  $('#btnCnEnd').addEventListener('click', () => {
+    if (CN.over) return;
+    const a = CN.teams[0], b = CN.teams[1];
+    CN.finish((b && a && b.score > a.score) ? 1 : 0, 'أُنهيت اللعبة');
+  });
   $('#btnCnKeyPad').addEventListener('click', () => {
     Snd.pick();
     $('#padPin').textContent = CNPad.pin || '------';
